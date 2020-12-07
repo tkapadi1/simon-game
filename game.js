@@ -28,11 +28,20 @@ $(document).keypress(function () {
 
 // to check the button click of mouse and its attribute.
 $(".btn").click(function () {
-  var userChosenColour = $(this).attr("id");
-  userClickedPattern.push(userChosenColour);
-  playSound(userChosenColour);
-  animatePress(userChosenColour);
-  checkAnswer(userClickedPattern.length - 1);
+  if (running) {
+    //this code executes when the keypress event occurs.
+    $("#level-title").text("level " + currentLevel);
+    setTimeout(function () {
+      nextSequence();
+    }, 500);
+    running = false;
+  }else{
+    var userChosenColour = $(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+    playSound(userChosenColour);
+    animatePress(userChosenColour);
+    checkAnswer(userClickedPattern.length - 1);
+  }
 });
 
 
